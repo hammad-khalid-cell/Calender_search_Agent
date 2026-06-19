@@ -11,7 +11,7 @@ from app.config import GROQ_API_KEY
 tools = [web_search_tool, get_calendar_events, create_calendar_event]
 
 llm = ChatGroq(
-    model="llama-3.3-70b-versatile",
+    model="openai/gpt-oss-120b",
     api_key=GROQ_API_KEY,
     temperature=0,
 )
