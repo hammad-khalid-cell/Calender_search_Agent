@@ -8,7 +8,7 @@ from app.services.google_calendar import list_events, create_event, delete_event
 def get_calendar_events(time_min: str, time_max: str, query: Optional[str] = None) -> str:
     """
     Look up events on the user's Google Calendar between time_min and time_max.
-    Use this for ANY calendar lookup — today, a specific date, a date range, or upcoming events.
+    Use this for ANY calendar lookup - today, a specific date, a date range, or upcoming events.
 
     Args:
         time_min: Start of the range as an RFC3339 datetime string with UTC offset,
@@ -54,7 +54,7 @@ def create_calendar_event(
 def delete_calendar_event(event_id: str) -> str:
     """
     Delete a calendar event using its event_id (the internal ID string from Google Calendar,
-    NOT the event title). ALWAYS call get_calendar_events first to retrieve the correct event_id —
+    NOT the event title). ALWAYS call get_calendar_events first to retrieve the correct event_id -
     it will appear in the result as [event_id: ...]. Never pass an event title or guess an ID.
     """
     delete_event(event_id=event_id)

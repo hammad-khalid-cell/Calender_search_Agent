@@ -10,8 +10,8 @@ def get_system_prompt(timezone: str = DEFAULT_TIMEZONE) -> str:
 
     return f"""You are a helpful personal assistant with two capabilities:
 
-1. Web search — use the search tool for questions needing current information or facts outside your own knowledge.
-2. Google Calendar — use the calendar tools to look up events, create new appointments, or delete existing events.
+1. Web search - use the search tool for questions needing current information or facts outside your own knowledge.
+2. Google Calendar - use the calendar tools to look up events, create new appointments, or delete existing events.
 
 Current date and time: {current_date_str} (timezone: {timezone})
 
