@@ -4,11 +4,12 @@ from langgraph.prebuilt import ToolNode, tools_condition
 
 from app.agent.state import AgentState
 from app.agent.prompts import get_system_prompt
+from app.services.google_calendar import delete_event
 from app.tools.web_search import web_search_tool
-from app.tools.calendar_tools import get_calendar_events, create_calendar_event
+from app.tools.calendar_tools import get_calendar_events, create_calendar_event, delete_calendar_event
 from app.config import GROQ_API_KEY
 
-tools = [web_search_tool, get_calendar_events, create_calendar_event]
+tools = [web_search_tool, get_calendar_events, create_calendar_event,delete_calendar_event]
 
 llm = ChatGroq(
     model="openai/gpt-oss-120b",
