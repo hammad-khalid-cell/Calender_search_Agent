@@ -9,3 +9,5 @@ google-auth-oauthlib
 python-dotenv
 tzdata
 langchain-groq
+sqlalchemy
+cryptography
