@@ -92,3 +92,11 @@ def create_event(
         "end": created.get("end"),
         "htmlLink": created.get("htmlLink"),
     }
+
+def delete_event(event_id: str):
+    """
+    Delete an event from the primary calendar by its event ID.
+    """
+    service = get_calendar_service()
+    service.events().delete(calendarId="primary", eventId=event_id).execute()
+    return {"deleted": True, "event_id": event_id}

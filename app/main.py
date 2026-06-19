@@ -1,14 +1,27 @@
-import sys
 from app.agent.graph import build_graph
 
 
-def run_agent(query: str):
+def run_chat():
     graph = build_graph()
-    result = graph.invoke({"messages": [{"role": "user", "content": query}]})
-    print(result["messages"][-1].content)
+    messages = []
+
+    print("Calendar & Search Agent — type 'exit' to quit\n")
+
+    while True:
+        user_input = input("You: ").strip()
+        if user_input.lower() in ("exit", "quit"):
+            break
+        if not user_input:
+            continue
+
+        messages.append({"role": "user", "content": user_input})
+
+        result = graph.invoke({"messages": messages})
+        messages = result["messages"]
+
+        ai_response = messages[-1].content
+        print(f"\nAgent: {ai_response}\n")
 
 
 if __name__ == "__main__":
-    query = " ".join(sys.argv[1:]) or "What are my events today?"
-    run_agent(query)
-
+    run_chat()

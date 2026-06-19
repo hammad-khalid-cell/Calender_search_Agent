@@ -1,8 +1,7 @@
 from typing import Optional, List
 from langchain_core.tools import tool
 
-from app.services.google_calendar import list_events, create_event
-
+from app.services.google_calendar import list_events, create_event, delete_event
 
 @tool
 def get_calendar_events(time_min: str, time_max: str, query: Optional[str] = None) -> str:
@@ -22,8 +21,10 @@ def get_calendar_events(time_min: str, time_max: str, query: Optional[str] = Non
     if not events:
         return "No events found in that time range."
 
-    return "\n".join(f"- {e['summary']} ({e['start']} to {e['end']})" for e in events)
-
+    return "\n".join(
+        f"- {e['summary']} ({e['start']} to {e['end']}) [event_id: {e['id']}]"
+        for e in events
+    )
 
 @tool
 def create_calendar_event(
@@ -45,3 +46,13 @@ def create_calendar_event(
     """
     result = create_event(summary=summary, start=start, end=end, description=description, attendees=attendees)
     return f"Event '{result['summary']}' created. Link: {result['htmlLink']}"
+@tool
+def delete_calendar_event(event_id: str) -> str:
+    """
+    Delete a calendar event using its event_id (the internal ID string from Google Calendar,
+    NOT the event title). ALWAYS call get_calendar_events first to retrieve the correct event_id —
+    it will appear in the result as [event_id: ...]. Never pass an event title or guess an ID.If multiple events match the user's description,
+    ask the user to clarify which one before deleting.
+    """
+    delete_event(event_id=event_id)
+    return f"Event {event_id} has been deleted."
