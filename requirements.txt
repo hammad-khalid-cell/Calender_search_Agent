@@ -11,3 +11,6 @@ tzdata
 langchain-groq
 sqlalchemy
 cryptography
+fastapi
+uvicorn
+pydantic
